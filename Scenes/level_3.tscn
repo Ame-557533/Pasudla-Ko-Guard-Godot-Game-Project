@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://g1xm8b6ws4q" path="res://Scenes/map_border_end.tscn" id="14_rybab"]
 [ext_resource type="PackedScene" uid="uid://eo30kruldshw" path="res://Scenes/hud.tscn" id="15_g6bfm"]
 [ext_resource type="Script" uid="uid://b4ut2r1j2p66d" path="res://Script/throw_boundary.gd" id="16_ds67j"]
-[ext_resource type="PackedScene" uid="uid://ff7upcwoq11q" path="res://Scenes/level_4.tscn" id="16_ki8bc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gmj2a"]
 texture = ExtResource("2_ki8bc")
@@ -169,7 +168,8 @@ position = Vector2(-192, 48)
 position = Vector2(432, 56)
 
 [node name="HUD" parent="." unique_id=1815937921 instance=ExtResource("15_g6bfm")]
-next_level_scene = ExtResource("16_ki8bc")
+next_level_path = "uid://ff7upcwoq11q"
+first_level_path = "uid://elst0xn32iil"
 
 [node name="ThrowBoundary" type="Area2D" parent="." unique_id=2049990497 groups=["hud", "player"]]
 collision_layer = 2

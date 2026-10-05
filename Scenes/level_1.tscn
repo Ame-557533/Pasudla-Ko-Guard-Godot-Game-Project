@@ -20,7 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://cjfv6w0lqy487" path="res://Scenes/trash_bin.tscn" id="18_bd6hb"]
 [ext_resource type="Script" uid="uid://b4ut2r1j2p66d" path="res://Script/throw_boundary.gd" id="19_x68w5"]
 [ext_resource type="PackedScene" uid="uid://d0sg4yw5f34gf" path="res://Scenes/npc_guard.tscn" id="20_vyomg"]
-[ext_resource type="PackedScene" uid="uid://bjpenfck6047x" path="res://Scenes/level_2.tscn" id="21_imks0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mcj63"]
 texture = ExtResource("6_gcla0")
@@ -455,7 +454,8 @@ shape = SubResource("RectangleShape2D_rm7ua")
 position = Vector2(-680, 168)
 
 [node name="HUD" parent="." unique_id=1815937921 instance=ExtResource("17_7sml1")]
-next_level_scene = ExtResource("21_imks0")
+next_level_path = "uid://bjpenfck6047x"
+first_level_path = "uid://elst0xn32iil"
 
 [connection signal="body_entered" from="Trashes/trash_paper2" to="Student" method="_on_trash_paper_2_body_entered"]
 [connection signal="body_entered" from="Trashes/trash_bottle2" to="Student" method="_on_trash_bottle_2_body_entered"]
