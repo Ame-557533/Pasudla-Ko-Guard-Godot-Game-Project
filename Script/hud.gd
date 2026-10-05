@@ -4,6 +4,7 @@ signal score_updated(current_score: int, max_score: int)
 
 @export var max_score: int = 5
 @export var next_level_scene: PackedScene 
+@export var first_level_scene: PackedScene # Assign Level1.tscn here on Level 5
 
 var current_score: int = 0
 
@@ -80,13 +81,20 @@ func show_completion_ui() -> void:
 func _on_yes_button_pressed() -> void:
 	get_tree().paused = false
 	if next_level_scene != null:
+		# Advances to Level 2, 3, 4, etc.
 		get_tree().change_scene_to_packed(next_level_scene)
+	elif first_level_scene != null:
+		# On Level 5: Restarts back at Level 1 via Inspector PackedScene
+		get_tree().change_scene_to_packed(first_level_scene)
 	else:
-		get_tree().reload_current_scene()
+		# On Level 5 Fallback: Change "res://Level1.tscn" to match your actual file path
+		get_tree().change_scene_to_file("res://Level1.tscn")
 
 func _on_no_button_pressed() -> void:
 	get_tree().paused = false
 	if next_level_scene != null:
+		# Restarts current level for intermediate levels
 		get_tree().reload_current_scene()
 	else:
+		# Quits game on Level 5
 		get_tree().quit()
