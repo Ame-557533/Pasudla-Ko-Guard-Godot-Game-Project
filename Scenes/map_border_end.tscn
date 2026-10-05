@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://g1xm8b6ws4q"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rm7ua"]
+normal = Vector2(-1, 0)
+
+[node name="MapBorderEnd" type="StaticBody2D" unique_id=685354263]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1194183361]
+shape = SubResource("WorldBoundaryShape2D_rm7ua")

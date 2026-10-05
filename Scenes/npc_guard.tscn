@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://d0sg4yw5f34gf"]
+
+[ext_resource type="Script" uid="uid://s5e2niyt4uxo" path="res://Script/npc_guard.gd" id="1_ldu3l"]
+[ext_resource type="Texture2D" uid="uid://du037xj04ss5n" path="res://Sprite/Game Assets-Sheet.png" id="2_2ukrk"]
+[ext_resource type="PackedScene" uid="uid://c11j26xt50bkw" path="res://Scenes/dialog_bubble.tscn" id="3_2ukrk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_di3f1"]
+atlas = ExtResource("2_2ukrk")
+region = Rect2(15, 207, 15, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_am3id"]
+atlas = ExtResource("2_2ukrk")
+region = Rect2(30, 207, 15, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1x2l"]
+atlas = ExtResource("2_2ukrk")
+region = Rect2(45, 207, 15, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ow5rj"]
+atlas = ExtResource("2_2ukrk")
+region = Rect2(60, 207, 15, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rm7ua"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_di3f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_am3id")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1x2l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ow5rj")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ukrk"]
+radius = 8.0
+
+[node name="NPCGuard" type="Area2D" unique_id=398009658]
+script = ExtResource("1_ldu3l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=375044208]
+position = Vector2(-0.07947016, -2.5180209)
+scale = Vector2(-1.1367245, 0.9734205)
+sprite_frames = SubResource("SpriteFrames_rm7ua")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.18726626
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=27007893]
+shape = SubResource("CircleShape2D_2ukrk")
+
+[node name="DialogueBubble" parent="." unique_id=325598612 instance=ExtResource("3_2ukrk")]
+custom_minimum_size = Vector2(0, -60)
+offset_left = 8.0
+offset_top = -80.0
+offset_right = 8.0
+offset_bottom = -80.0

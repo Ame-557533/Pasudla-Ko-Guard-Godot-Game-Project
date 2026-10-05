@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://c11j26xt50bkw"]
+
+[ext_resource type="Script" uid="uid://2bo5k0ehnvnj" path="res://Script/dialog_bubble.gd" id="1_gp20u"]
+[ext_resource type="FontFile" uid="uid://chv8c0a6jdr7b" path="res://fonts/PixelOperator8.ttf" id="2_25ab8"]
+
+[node name="DialogueBubble" type="Control" unique_id=325598612]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_gp20u")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=510319906]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 0
+offset_left = -152.0
+offset_right = 72.0
+offset_bottom = 48.0
+mouse_filter = 2
+
+[node name="MarginContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1112807399]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=2128513672]
+layout_mode = 2
+
+[node name="SpeakerLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=108437388]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_25ab8")
+theme_override_font_sizes/font_size = 8
+
+[node name="DialogueLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=301270535]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_25ab8")
+theme_override_font_sizes/font_size = 8
+autowrap_mode = 3

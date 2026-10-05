@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cjfv6w0lqy487"]
+
+[ext_resource type="Script" uid="uid://dsn1b0vldvlpq" path="res://Script/trash_bin.gd" id="1_f172w"]
+[ext_resource type="Texture2D" uid="uid://gst2sq3oeu3i" path="res://Sprite/World Tileset.png" id="2_hjoye"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rm7ua"]
+size = Vector2(12, 12)
+
+[node name="TrashBin" type="Node2D" unique_id=1816368293]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=327207498]
+scale = Vector2(1.0323529, 1)
+texture = ExtResource("2_hjoye")
+hframes = 16
+vframes = 16
+frame = 34
+
+[node name="ScoreZone" type="Area2D" parent="." unique_id=1534482814]
+collision_mask = 4
+script = ExtResource("1_f172w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreZone" unique_id=1029922187]
+position = Vector2(-2, 2)
+shape = SubResource("RectangleShape2D_rm7ua")

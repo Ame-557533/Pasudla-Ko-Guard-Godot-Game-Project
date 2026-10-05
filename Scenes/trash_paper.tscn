@@ -1,0 +1,189 @@
+[gd_scene format=3 uid="uid://brtqru6t54u1a"]
+
+[ext_resource type="Texture2D" uid="uid://du037xj04ss5n" path="res://Sprite/Game Assets-Sheet.png" id="1_156rk"]
+
+[sub_resource type="GDScript" id="GDScript_156rk"]
+script/source = "extends Area2D
+
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+var is_thrown: bool = false
+var velocity: Vector2 = Vector2.ZERO
+var throw_gravity: float = 980.0
+
+func _ready() -> void:
+	add_to_group(\"trash\")
+	
+	if sprite:
+		sprite.play()
+		
+	if not body_entered.is_connected(_on_body_entered):
+		body_entered.connect(_on_body_entered)
+	if not area_entered.is_connected(_on_area_entered):
+		area_entered.connect(_on_area_entered)
+
+func _physics_process(delta: float) -> void:
+	if is_thrown:
+		velocity.y += throw_gravity * delta
+		position += velocity * delta
+
+func _on_body_entered(body: Node2D) -> void:
+	if _is_scorezone(body):
+		return
+
+	if is_thrown:
+		if body.is_in_group(\"ground\") or \"ground\" in body.name.to_lower():
+			return_to_player()
+		return
+
+	if not is_thrown and body.is_in_group(\"player\") and body.has_method(\"equip_trash\"):
+		body.equip_trash(self)
+
+func _on_area_entered(area: Area2D) -> void:
+	if _is_scorezone(area):
+		return
+		
+	if is_thrown and (area.is_in_group(\"ground\") or \"bounds\" in area.name.to_lower()):
+		return_to_player()
+
+func _is_scorezone(node: Node) -> bool:
+	if node.is_in_group(\"score_zone\") or node.is_in_group(\"trash_bin\"):
+		return true
+	var low_name = node.name.to_lower()
+	return \"score\" in low_name or \"bin\" in low_name
+
+func hold_in_hand() -> void:
+	if sprite:
+		sprite.stop()
+		sprite.frame = 0
+
+func launch(initial_velocity: Vector2) -> void:
+	visible = true
+	is_thrown = true
+	velocity = initial_velocity
+	
+	if sprite:
+		sprite.play()
+
+func return_to_player() -> void:
+	is_thrown = false
+	velocity = Vector2.ZERO
+	
+	var player = get_tree().get_first_node_in_group(\"player\")
+	if player and player.has_method(\"return_trash_to_queue\"):
+		player.return_trash_to_queue(self)
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_156rk"]
+atlas = ExtResource("1_156rk")
+region = Rect2(15, 100, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mnd8"]
+atlas = ExtResource("1_156rk")
+region = Rect2(30, 100, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cavkq"]
+atlas = ExtResource("1_156rk")
+region = Rect2(45, 100, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ewtc"]
+atlas = ExtResource("1_156rk")
+region = Rect2(60, 100, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxgd2"]
+atlas = ExtResource("1_156rk")
+region = Rect2(75, 100, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjtqn"]
+atlas = ExtResource("1_156rk")
+region = Rect2(90, 100, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8eryg"]
+atlas = ExtResource("1_156rk")
+region = Rect2(105, 100, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2h63"]
+atlas = ExtResource("1_156rk")
+region = Rect2(120, 100, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hw4ct"]
+atlas = ExtResource("1_156rk")
+region = Rect2(135, 100, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86opd"]
+atlas = ExtResource("1_156rk")
+region = Rect2(150, 100, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84p66"]
+atlas = ExtResource("1_156rk")
+region = Rect2(165, 100, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4okge"]
+atlas = ExtResource("1_156rk")
+region = Rect2(180, 100, 15, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rm7ua"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_156rk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mnd8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cavkq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ewtc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxgd2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjtqn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8eryg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2h63")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hw4ct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86opd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84p66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4okge")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rm7ua"]
+size = Vector2(8, 8)
+
+[node name="trash_paper" type="Area2D" unique_id=414874567]
+collision_layer = 4
+collision_mask = 3
+script = SubResource("GDScript_156rk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1203978942]
+position = Vector2(0, 8)
+scale = Vector2(1, 0.82)
+sprite_frames = SubResource("SpriteFrames_rm7ua")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.19739242
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1053614805]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_rm7ua")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
